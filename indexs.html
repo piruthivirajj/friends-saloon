@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friends Saloon</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#0a0a0a;color:white;scroll-behavior:smooth;}
+
+/* NAV */
+nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 8%;background:#000;position:sticky;top:0;
+}
+nav h1{color:#d4af37;}
+nav a{color:white;margin-left:20px;text-decoration:none;}
+nav a:hover{color:#d4af37;}
+
+/* HERO */
+.hero{
+  height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.8)),
+  url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a');
+  background-size:cover;background-position:center;
+}
+.hero h2{font-size:clamp(30px,5vw,60px);color:#d4af37;}
+.hero p{margin:10px 0;}
+
+/* BUTTON */
+.btn{
+  background:#d4af37;color:black;padding:12px 25px;
+  border-radius:5px;text-decoration:none;
+  transition:0.3s;
+}
+.btn:hover{transform:scale(1.05);}
+
+/* SECTIONS */
+section{padding:60px 8%;}
+h2{color:#d4af37;text-align:center;margin-bottom:30px;}
+
+/* SERVICES */
+.cards{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;
+}
+.card{
+  background:#111;padding:20px;border-radius:10px;text-align:center;
+  transition:0.3s;
+}
+.card:hover{transform:translateY(-8px);}
+
+/* GALLERY */
+.images{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;
+}
+.images img{
+  width:100%;height:200px;object-fit:cover;border-radius:10px;
+  animation:float 4s infinite ease-in-out;
+}
+@keyframes float{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+  100%{transform:translateY(0);}
+}
+
+/* REVIEWS */
+.review-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:20px;
+}
+.add-btn{
+  background:#d4af37;color:black;padding:8px 12px;border:none;
+  cursor:pointer;border-radius:5px;
+}
+
+.review-container{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;
+}
+.review-card{
+  background:#111;padding:15px;border-radius:10px;
+}
+.stars{color:#d4af37;}
+.delete-btn{
+  margin-top:10px;background:red;color:white;border:none;padding:5px;
+}
+
+/* RATING BAR */
+.rating-bar{
+  margin-bottom:20px;
+}
+.bar{
+  display:flex;align-items:center;margin:5px 0;
+}
+.bar div{
+  height:8px;background:#d4af37;margin-left:10px;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.8);display:none;justify-content:center;align-items:center;
+}
+.modal-content{
+  background:#111;padding:20px;border-radius:10px;
+}
+.modal input,.modal textarea{
+  width:100%;margin:5px 0;padding:8px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;bottom:20px;right:20px;background:#25D366;
+  padding:15px;border-radius:50%;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{flex-direction:column;}
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<h1>Friends Saloon</h1>
+<div>
+<a href="#">Home</a>
+<a href="#services">Services</a>
+<a href="#gallery">Gallery</a>
+<a href="#reviews">Reviews</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+
+<section class="hero">
+<h2>Sharp Cuts. Premium Style.</h2>
+<p>By Ramesh</p>
+<a href="https://wa.me/917397105051" class="btn">Book Now</a>
+</section>
+
+<section id="services">
+  <h2>Our Premium Services</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Haircut</h3>
+      <p>₹150</p>
+    </div>
+
+    <div class="card">
+      <h3>Beard Trim</h3>
+      <p>₹80</p>
+    </div>
+
+    <div class="card">
+      <h3>Hair Styling</h3>
+      <p>₹200</p>
+    </div>
+
+    <!-- NEW PREMIUM SERVICE -->
+    <div class="card highlight">
+      <h3>Premium Grooming</h3>
+      <p>₹399</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="gallery">
+<h2>Gallery</h2>
+<div class="images">
+<img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1">
+<img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e">
+<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
+</div>
+</section>
+
+<section id="reviews">
+<h2>Customer Reviews</h2>
+
+<div class="review-header">
+<h3>Ratings</h3>
+<button class="add-btn" onclick="openModal()">➕ Add Review</button>
+</div>
+
+<div class="rating-bar" id="ratingBar"></div>
+
+<div class="review-container" id="reviewsList"></div>
+
+</section>
+
+<section id="contact">
+ <h2>Contact Us</h2>
+  <center>
+  <p>Friends Saloon, First Floor</p>
+  <p>Opposite CTC Bus Depot</p>
+  <p>Karamadai Road, Mettupalayam</p>
+  <p>📞 7397105051</p>
+</center>
+<iframe src="https://maps.google.com/maps?q=mettupalayam&t=&z=13&output=embed" width="100%" height="250"></iframe>
+</section>
+
+<footer style="text-align:center;padding:20px;background:black;">
+© 2026 Friends Saloon
+</footer>
+
+<a href="https://wa.me/917397105051" class="whatsapp">💬</a>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3>Add Review</h3>
+<input type="text" id="name" placeholder="Name">
+<input type="number" id="rating" min="1" max="5" placeholder="Rating (1-5)">
+<textarea id="comment" placeholder="Your review"></textarea>
+<button onclick="addReview()">Submit</button>
+</div>
+</div>
+
+<script>
+
+let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+function save(){
+  localStorage.setItem("reviews", JSON.stringify(reviews));
+}
+
+function render(){
+  const list = document.getElementById("reviewsList");
+  list.innerHTML="";
+
+  let counts=[0,0,0,0,0];
+
+  reviews.forEach((r,i)=>{
+    counts[r.rating-1]++;
+
+    list.innerHTML += `
+      <div class="review-card">
+        <div class="stars">${"★".repeat(r.rating)}</div>
+        <p>${r.comment}</p>
+        <h4>- ${r.name}</h4>
+        <button class="delete-btn" onclick="del(${i})">Delete</button>
+      </div>
+    `;
+  });
+
+  // rating bars
+  let total = reviews.length || 1;
+  let barHTML="";
+  for(let i=5;i>=1;i--){
+    let percent = Math.round((counts[i-1]/total)*100);
+    barHTML += `
+      <div class="bar">${i}★ 
+        <div style="width:${percent}%"></div>
+        ${percent}%
+      </div>`;
+  }
+  document.getElementById("ratingBar").innerHTML = barHTML;
+}
+
+function addReview(){
+  let name=document.getElementById("name").value;
+  let rating=parseInt(document.getElementById("rating").value);
+  let comment=document.getElementById("comment").value;
+
+  if(!name || !rating || !comment) return alert("Fill all");
+
+  reviews.push({name,rating,comment});
+  save(); render();
+  document.getElementById("modal").style.display="none";
+}
+
+function del(i){
+  reviews.splice(i,1);
+  save(); render();
+}
+
+function openModal(){
+  document.getElementById("modal").style.display="flex";
+}
+
+render();
+
+</script>
+
+</body>
+</html>
